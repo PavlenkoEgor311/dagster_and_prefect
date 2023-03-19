@@ -1,7 +1,6 @@
 from dagster import asset, materialize, op
 import pandas as pd
 from urllib.parse import urlparse
-from my_prefect import my_flow
 
 path_in, path_out = "original.csv", "norm.csv"
 
@@ -34,5 +33,4 @@ def run_assets():
 
 
 if __name__ == '__main__':
-    # run_assets()
-    my_flow(path_in, path_out)
+    run_assets()

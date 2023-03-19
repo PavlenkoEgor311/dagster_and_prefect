@@ -2,6 +2,8 @@ from prefect import task, flow
 import pandas as pd
 from urllib.parse import urlparse
 
+path_in, path_out = "original.csv", "norm.csv"
+
 
 @task
 def load_data(path: str) -> pd.DataFrame:
@@ -21,7 +23,11 @@ def upload_data(df: pd.DataFrame, path: str):
 
 
 @flow(name="task_prefect")
-def my_flow(path_in, path_out):
+def my_flow():
     data = load_data(path=path_in)
     data_domains = get_domain(df=data)
     upload_data(df=data_domains, path=path_out)
+
+
+if __name__ == '__main__':
+    my_flow()
